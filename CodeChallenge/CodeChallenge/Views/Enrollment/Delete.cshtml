@@ -1,0 +1,70 @@
+﻿@model CodeChallenge.Models.Enrollment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<p class="error">@ViewBag.ErrorMessage</p>
+
+<h3>Are you sure you want to delete this enrollment?</h3>
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Benefit.Coverage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Benefit.Coverage)
+        </dd>
+
+        <dt>
+            Employee
+            @*Html.DisplayNameFor(model => model.Employee.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.LastName)
+        </dd>
+
+        <dt>
+            Last Name
+            @*@Html.DisplayNameFor(model => model.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            First Name
+            @*@Html.DisplayNameFor(model => model.FirstName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Dependent Type
+            @*@Html.DisplayNameFor(model => model.DependentType)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DependentType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CodeChallenge.Models.Enrollment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Enrollment</h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Benefit.Coverage)
+        </th>
+        <th>
+            Employee
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Dependent Type
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Benefit.Coverage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DependentType)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EnrollmentID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EnrollmentID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EnrollmentID })
+            </td>
+        </tr>
+    }
+
+</table>

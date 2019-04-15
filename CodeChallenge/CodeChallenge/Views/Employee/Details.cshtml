@@ -1,0 +1,189 @@
+﻿@model CodeChallenge.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Last Name
+            @*@Html.DisplayNameFor(model => model.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            First Name
+            @*@Html.DisplayNameFor(model => model.FirstName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Pay Check Amount
+            @*@Html.DisplayNameFor(model => model.PayCheckAmt)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PayCheckAmt)
+        </dd>
+        <dt>--------------------</dt>
+        <dd>     </dd>
+        <dt>Benefit Costs:</dt>
+        <dd>     </dd>
+
+        @{ string firstname = (Model.FirstName).Substring(0, 1);}
+        @{ string lastname = (Model.LastName).Substring(0, 1);}
+        @{ decimal annual = 0;}
+        @{ decimal discount = 10;}
+        @{ decimal depdDisc = 0; }
+
+        @{ decimal benefitCost = 1000;}
+        @{ decimal depdBenefitCost = 500; }
+        @{ decimal discountPercent = (decimal)0.9;}
+        @{ decimal payPeriods = 26;}
+
+        @{ decimal depdCostPayP = 0; }
+        @{ depdCostPayP = depdBenefitCost / payPeriods;}
+        @{ depdDisc = depdBenefitCost * discountPercent;}
+
+        @{ decimal empDisc = 0;}
+        @{ empDisc = benefitCost * discountPercent;}
+        @{ decimal depdDiscPayP = 0; }
+        @{ depdDiscPayP = depdBenefitCost * discountPercent / payPeriods;}
+        @{ decimal empDiscPayP = 0;}
+        @{ empDiscPayP = benefitCost * discountPercent / payPeriods;}
+        @{ decimal empCostPayP = 0;}
+        @{ empCostPayP = benefitCost / payPeriods;}
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enrollments)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Type</th>
+                    <th>Annual</th>
+                    <th>Pay Period</th>
+                    <th>Discount</th>
+                </tr>
+                @foreach (var item in Model.Enrollments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DependentType)
+                        </td>
+                        @{string Type = item.DependentType.ToString();}
+                        @{ firstname = (item.FirstName).Substring(0, 1);}
+                        @{ lastname = (item.LastName).Substring(0, 1);}
+                        @if (Type == "EMPLOYEE")
+                        {
+                            if (lastname == "A" || firstname == "A")
+                            {
+                                { annual = annual + empDisc; }
+                                <td>@(String.Format("{0:0.00}", empDisc))</td>
+                            }
+
+                            else
+                            {
+                                { annual = annual + benefitCost; }
+                                <td>@(String.Format("{0:0.00}", benefitCost))</td>}
+                            if (lastname == "A" || firstname == "A")
+                            {
+                                <td>@(String.Format("{0:0.##}", (empDiscPayP)))</td>
+
+                            }
+                            else
+                            {
+                                <td>@(String.Format("{0:0.##}", (empCostPayP))) </td>
+
+                            }
+
+                            if (lastname == "A" || firstname == "A")
+                            {
+                                <td>@(String.Format("{0:#%}", (discount / 100)))</td>
+
+                            }
+                            else
+                            {
+                                <td>@(String.Format("{0:0%}", 0)) </td>
+
+                            }
+
+                        }
+                        else
+                        {
+                            if (lastname == "A" || firstname == "A")
+                            {
+                                { annual = annual + depdDisc; }
+
+                                <td>@(String.Format("{0:0.00}", (depdDisc)))</td>
+                            }
+                            else
+                            {
+                                { annual = annual + depdBenefitCost; }
+
+                                <td>@(String.Format("{0:0.00}", depdBenefitCost))</td>
+                            }
+                            if (lastname == "A" || firstname == "A")
+                            {
+
+                                <td>@(Math.Round((depdDiscPayP), 2))</td>
+                            }
+                            else
+                            {
+                                <td>@(Math.Round((depdCostPayP), 2))</td>
+                            }
+                            if (lastname == "A" || firstname == "A")
+                            {
+                                <td>@(String.Format("{0:#%}", (discount / 100)))</td>
+
+                            }
+                            else
+                            {
+                                <td>@(String.Format("{0:0%}", 0)) </td>
+
+                            }
+
+
+                        }
+
+                    </tr>
+                }
+                <tr>
+                    <th>Final Totals</th>
+                    <th>   </th>
+                    <th>   </th>
+                    <th>@(String.Format("{0:0.00}", annual))</th>
+                    @{decimal paych = annual / 26;}
+                    <th>@(String.Format("{0:0.00}", Math.Round(paych, 2)))</th>
+                    <th>      </th>
+                </tr>
+
+
+            </table>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Enrollment", "Create", "Enrollment") |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

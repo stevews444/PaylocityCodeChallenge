@@ -1,0 +1,62 @@
+﻿@model CodeChallenge.Models.Enrollment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Enrollment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Benefit.Coverage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Benefit.Coverage)
+        </dd>
+
+        <dt>
+            Employee
+            @*@Html.DisplayNameFor(model => model.Employee.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.LastName)
+        </dd>
+
+        <dt>
+            Last Name
+            @*@Html.DisplayNameFor(model => model.LastName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            First Name
+            @*@Html.DisplayNameFor(model => model.FirstName)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            Dependent Type
+            @*@Html.DisplayNameFor(model => model.DependentType)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DependentType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EnrollmentID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
