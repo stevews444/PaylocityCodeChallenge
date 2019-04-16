@@ -27,7 +27,8 @@
             @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
         </th>
         <th>
-            @Html.ActionLink("Pay Check Amt", "Index", new { sortOrder = ViewBag.NumberSort })
+            Gross Pay Amount
+            @*@Html.ActionLink("Pay Check Amt", "Index", new { sortOrder = ViewBag.NumberSort })*@
         </th>
         <th></th>
     </tr>
@@ -41,7 +42,10 @@
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PayCheckAmt)
+                @{decimal grossPay = (decimal)(item.PayCheckAmt); }
+                @(String.Format("{0:0.00}", grossPay))
+
+                @*@Html.DisplayFor(modelItem => item.PayCheckAmt))*@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

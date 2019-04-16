@@ -33,8 +33,10 @@
             @*@Html.DisplayNameFor(model => model.PayCheckAmt)*@
         </dt>
 
+        @{decimal grossPay = (decimal)(Model.PayCheckAmt); }
         <dd>
-            @Html.DisplayFor(model => model.PayCheckAmt)
+            @*@Html.DisplayFor(model => model.PayCheckAmt)*@
+            @(String.Format("{0:0.00}", grossPay))
         </dd>
         <dt>--------------------</dt>
         <dd>     </dd>
@@ -168,7 +170,7 @@
                     </tr>
                 }
                 <tr>
-                    <th>Final Totals</th>
+                    <th>Total Costs</th>
                     <th>   </th>
                     <th>   </th>
                     <th>@(String.Format("{0:0.00}", annual))</th>
@@ -176,10 +178,35 @@
                     <th>@(String.Format("{0:0.00}", Math.Round(paych, 2)))</th>
                     <th>      </th>
                 </tr>
-
+                <tr>
+                    <th>     </th>
+                    <th>     </th>
+                    <th>     </th>
+                    <th>======</th>
+                    <th>======</th>
+                    <th>     </th>
+                </tr>
+                <tr>
+                    <th>Est. Net Pay</th>
+                    <th>   </th>
+                    <th>   </th>
+                    @{ decimal netAnnual = 0;}
+                    @{netAnnual = grossPay - annual; }
+                    <th>
+                        @(String.Format("{0:0.00}", netAnnual))
+                    </th>
+                    @{ decimal netPay = 0;}
+                    @{ netPay = (grossPay / 26) - paych;}
+                    <th>
+                        @(String.Format("{0:0.00}", netPay))
+                    </th>
+                    <th>      </th>
+                </tr>
 
             </table>
         </dd>
+
+
     </dl>
 </div>
 <p>
